@@ -1,0 +1,25 @@
+#disk adding
+
+lsblk
+mkfs -t ext4 /dev/vdX
+mkdir /mnt/test
+mount /dev/sdX /mnt/test
+
+#apache
+
+a2enmod headers
+export HOSTNAME=`uname -n`
+Header set apachehost ${HOSTNAME}
+service apache2 restart
+
+docker
+
+apt install docker docker-compose docker.io
+nano /etc/docker/daemon.json
+
+{
+    "registry-mirrors": ["https://registry.docker.ir"]
+}
+
+systemctl daemon-reload
+systemctl restart docker
